@@ -1,0 +1,24 @@
+body{
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  }
+  .question {
+    background-color: #E4E4E4;
+    padding: 15px 30px;
+  }
+  .answers {
+    padding: 10px;
+  }
+  .container {
+    margin: 2.5em auto 5em;
+    max-width: 50em;
+  }
+  .card {
+    background: #fff;
+    box-shadow: 0 0 6px rgba(0,0,0,.5);
+    padding: 2em;
+    border-radius: 6px;
+  }
+  .instruction {
+    font-style: italic;
+    padding-top: 20px;
+  }
