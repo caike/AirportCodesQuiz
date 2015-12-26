@@ -22,10 +22,12 @@ class Quiz extends React.Component {
     var arr = Array.apply(null, Array(this.props.data.length));
     let displayQuestionFlag = arr.map(function (x, i) { return false });
 
-    displayQuestionFlag[0] = true;
-    console.log( displayQuestionFlag );
+    let questionCounter = 0;
+    displayQuestionFlag[questionCounter] = true;
+    //console.log( displayQuestionFlag );
 
-    this.state = { displayQuestionFlag };
+    this.state = { displayQuestionFlag, questionCounter };
+    this._nextQuestionHandler = this._nextQuestionHandler.bind(this);
   }
 
   render(){
@@ -44,7 +46,22 @@ class Quiz extends React.Component {
   }
 
   _buildQuestionForAirport(airport, displayQuestion=false){
-    return(<Question {...airport} displayQuestion={displayQuestion} />);
+    return(<Question
+           {...airport}
+           displayQuestion={displayQuestion}
+           nextQuestionHandler={this._nextQuestionHandler}
+           />);
+  }
+
+  _nextQuestionHandler(){
+    let questionCounter = this.state.questionCounter;
+    let displayQuestionFlag = this.state.displayQuestionFlag;
+
+    displayQuestionFlag[questionCounter] = false;
+    questionCounter++;
+
+    displayQuestionFlag[questionCounter] = true;
+    this.setState({ displayQuestionFlag, questionCounter });
   }
 }
 
@@ -65,7 +82,9 @@ class Question extends React.Component {
 
   _buildAnswers(){
 
-    let buttons = [<button className="pure-button pure-button-primary">{this.props.code}</button>];
+    let buttons = [<button
+      onClick={this.props.nextQuestionHandler}
+      className="pure-button pure-button-primary">{this.props.code}</button> ];
 
     // generates two wrong answers
     buttons.push(this._generateWrongAnswer());
@@ -78,7 +97,9 @@ class Question extends React.Component {
 
   _generateWrongAnswer(){
     let wrongCode = [1,2,3].map( () => String.fromCharCode(us.random(65,90)) ).join("");
-    return (<button className="pure-button pure-button-primary">
+    return (<button
+            onClick={this.props.nextQuestionHandler}
+            className="pure-button pure-button-primary">
             {wrongCode}</button>);
   }
 
