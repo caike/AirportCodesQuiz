@@ -16,7 +16,8 @@
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "reactify": "^1.1.1"
+    "reactify": "^1.1.1",
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

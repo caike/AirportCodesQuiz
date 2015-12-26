@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import API from "./api";
+import us from "underscore";
 
 class App extends React.Component {
 
@@ -64,12 +65,21 @@ class Question extends React.Component {
 
   _buildAnswers(){
 
-    let answerList = [0,1,2].map( (i) => {
-      return (<li><button className="pure-button pure-button-primary">{this.props.code}</button></li>);
-      //return (<li><input type="radio" name="answer" /> {this.props.code}</li>);
-    }); // generate two random
+    let buttons = [<button className="pure-button pure-button-primary">{this.props.code}</button>];
+
+    // generates two wrong answers
+    buttons.push(this._generateWrongAnswer());
+    buttons.push(this._generateWrongAnswer());
+
+    let answerList = us.shuffle(buttons.map( (button) => <li>{button}</li> ));
 
     return(<div>{answerList}</div>);
+  }
+
+  _generateWrongAnswer(){
+    let wrongCode = [1,2,3].map( () => String.fromCharCode(us.random(65,90)) ).join("");
+    return (<button className="pure-button pure-button-primary">
+            {wrongCode}</button>);
   }
 
 }
