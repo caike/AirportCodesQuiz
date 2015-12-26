@@ -65,7 +65,8 @@ class Question extends React.Component {
   _buildAnswers(){
 
     let answerList = [0,1,2].map( (i) => {
-      return (<li><input type="radio" name="answer" /> {this.props.code}</li>);
+      return (<li><button className="pure-button pure-button-primary">{this.props.code}</button></li>);
+      //return (<li><input type="radio" name="answer" /> {this.props.code}</li>);
     }); // generate two random
 
     return(<div>{answerList}</div>);

@@ -1,6 +1,26 @@
 body{
   font-family: "Open Sans",Helvetica,Arial,sans-serif;
   }
+
+  @media screen and (min-width: 35.5em) {
+    body {
+      font-size: 50px;
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    body {
+      font-size: 25px;
+    }
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .questions {
+    text-align: center;
+  }
   .question {
     background-color: #E4E4E4;
     padding: 15px 30px;
@@ -10,7 +30,10 @@ body{
   }
   .container {
     margin: 2.5em auto 5em;
-    max-width: 50em;
+    /*max-width: 50em;*/
+    max-width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   .card {
     background: #fff;
@@ -21,4 +44,20 @@ body{
   .instruction {
     font-style: italic;
     padding-top: 20px;
+  }
+
+  li {
+    padding: 5px;
+  }
+
+  @media screen and (min-width: 35.5em) {
+    button {
+      width: 75%;
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    button {
+      width: 35%;
+    }
   }
