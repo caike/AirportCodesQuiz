@@ -7,6 +7,7 @@
     "babelify": "^6.1.0",
     "browserify": "^10.2.0",
     "classnames": "^2.2.1",
+    "fastclick": "^1.0.6",
     "flux": "^2.1.1",
     "gulp": "^3.9.0",
     "gulp-browserify": "^0.5.1",

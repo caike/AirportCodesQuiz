@@ -4,6 +4,14 @@ import API from "./api";
 import us from "underscore";
 import cx from "classnames";
 
+import attachFastClick from "fastclick";
+
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    attachFastClick(document.body);
+  }, false);
+}
+
 class App extends React.Component {
 
   render(){
