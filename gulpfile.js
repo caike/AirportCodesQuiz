@@ -11,7 +11,7 @@ gulp.task("transpile", function() {
         debug: true,
         transform: ["babelify", "reactify"]
       }))
-      //.pipe(uglify())
+      .pipe(uglify())
       .pipe(concat("bundle.js"))
       .pipe(gulp.dest("public/"));
 });
