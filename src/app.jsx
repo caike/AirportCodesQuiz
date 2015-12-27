@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import API from "./api";
 import us from "underscore";
+import cx from "classnames";
 
 class App extends React.Component {
 
@@ -24,7 +25,6 @@ class Quiz extends React.Component {
 
     let questionCounter = 0;
     displayQuestionFlag[questionCounter] = true;
-    //console.log( displayQuestionFlag );
 
     this.state = { displayQuestionFlag, questionCounter };
     this._nextQuestionHandler = this._nextQuestionHandler.bind(this);
@@ -33,7 +33,7 @@ class Quiz extends React.Component {
   render(){
     let airports = this.props.data.map( (airport, index) => {
       return this._buildQuestionForAirport(airport,
-        this.state.displayQuestionFlag[index]);
+        this.state.displayQuestionFlag[index], index);
     });
 
     return (<div>
@@ -45,9 +45,10 @@ class Quiz extends React.Component {
     );
   }
 
-  _buildQuestionForAirport(airport, displayQuestion=false){
+  _buildQuestionForAirport(airport, displayQuestion=false, index){
     return(<Question
            {...airport}
+           key={index}
            displayQuestion={displayQuestion}
            nextQuestionHandler={this._nextQuestionHandler}
            />);
@@ -68,42 +69,111 @@ class Quiz extends React.Component {
 
 class Question extends React.Component {
 
+  constructor(){
+    super();
+
+    this.state = {
+      isAnswered: false
+    }
+  }
+
   render(){
     let display = this.props.displayQuestion ? "block" : "none";
 
     return(<div className="card" style={{ display }}>
           <p>{this.props.name}</p>
-          <ul className="answer-list" style={{ listStyleType: "none" }}>
-            {this._buildAnswers()}
-          </ul>
+          <AnswerList nextQuestionHandler={this.props.nextQuestionHandler}
+            sortOrder={us.shuffle([0,1,2])}
+            wrongAnswers={[this._generateWrongCode(), this._generateWrongCode()]}
+            correctAnswer={this.props.code} />
          </div>);
   }
 
 
+  _generateWrongCode(correctCode){
+    // TODO: use correct code to check if EXACT SAME code was generated... low chances, but still.
+    return [1,2,3].map( () => String.fromCharCode(us.random(65,90)) ).
+      join("");
+  }
+}
+
+class AnswerList extends React.Component {
+
+  constructor(){
+    super();
+
+    this.state = { isAnswered: false };
+    this._submitAnswerHandler = this._submitAnswerHandler.bind(this);
+  }
+
+  render(){
+    return(<div>
+            <ul className="answer-list" style={{ listStyleType: "none" }}>
+              {this._buildAnswers()}
+            </ul>
+          </div>);
+
+  }
+
   _buildAnswers(){
 
-    let buttons = [<button
-      onClick={this.props.nextQuestionHandler}
-      className="pure-button pure-button-primary">{this.props.code}</button> ];
+    let answerObjs = [
+      { order: this.props.sortOrder[0],
+        answer: <Answer key={1}   submitAnswerHandler={this._submitAnswerHandler}   code={this.props.correctAnswer}   bgColorClass="btn-green-bg"   isAnswered={this.state.isAnswered} /> },
+      { order: this.props.sortOrder[1],
+        answer: <Answer key={2}   submitAnswerHandler={this._submitAnswerHandler}   code={this.props.wrongAnswers[0]} isAnswered={this.state.isAnswered} /> },
+      { order: this.props.sortOrder[2],
+        answer: <Answer key={3}   submitAnswerHandler={this._submitAnswerHandler}   code={this.props.wrongAnswers[1]} isAnswered={this.state.isAnswered}/> }
+    ];
 
-    // generates two wrong answers
-    buttons.push(this._generateWrongAnswer());
-    buttons.push(this._generateWrongAnswer());
+    let sortedShuffledAnswers = us.sortBy(answerObjs, "order");
 
-    let answerList = us.shuffle(buttons.map( (button) => <li>{button}</li> ));
-
-    return(<div>{answerList}</div>);
+    return(<div>{ us.map(sortedShuffledAnswers, (obj) => obj.answer) }</div>);
   }
 
-  _generateWrongAnswer(){
-    let wrongCode = [1,2,3].map( () => String.fromCharCode(us.random(65,90)) ).join("");
-    return (<button
-            onClick={this.props.nextQuestionHandler}
-            className="pure-button pure-button-primary">
-            {wrongCode}</button>);
+  _submitAnswerHandler(selectedCode){
+
+    this.setState({ isAnswered: true });
+
+    setTimeout( () => {
+      this.props.nextQuestionHandler()
+    }, 2000);
   }
+
 
 }
+
+class Answer extends React.Component {
+
+  render(){
+
+    // TODO: implement check mark icon display
+    let iconCxs = cx("fa", "fa-check-circle-o", "result-icon", {
+      //"check-is-hidden": !this.props.isAnswered
+      "check-is-hidden": true
+    });
+
+    let buttonCxs = cx("pure-button", "pure-button-primary", {
+      "is-answered": this.props.isAnswered,
+      [this.props.bgColorClass]: this.props.isAnswered
+    });
+
+    return(<li key={this.props.key}><i className={iconCxs}></i><button
+        onClick={ () => this._submitAnswer() }
+        ref={ (rightAnswer) => this.rightAnswer = rightAnswer }
+        className={buttonCxs}>{this.props.code}</button>
+      </li>);
+  }
+
+  _submitAnswer(){
+    //if(this.props.correctAnswer === this.props.code){
+      //this.setState({ isAnswered: true });
+    //}
+    this.props.submitAnswerHandler(this.props.code);
+  }
+}
+
+Answer.defaultProps = { bgColorClass: "btn-red-bg" };
 
 
 ReactDOM.render( <App list={API.airports}/>,

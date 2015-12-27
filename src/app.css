@@ -61,3 +61,41 @@ body{
       width: 35%;
     }
   }
+
+
+  i.result-icon {
+    color: green;
+  }
+
+  @media screen and (min-width: 35.5em) {
+    i.result-icon {
+      position: absolute;
+      font-size: 115px;
+      margin-left: -13%;
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    i.result-icon {
+      position: absolute;
+      font-size: 60px;
+      margin-left: -5%;
+    }
+  }
+
+  i.check-is-hidden {
+    display: none;
+  }
+
+  .is-answered {
+    background-color: green;
+  }
+
+  button.btn-red-bg {
+    background-color: red;
+  }
+
+  button.btn-green-bg {
+    background-color: green;
+  }
+
