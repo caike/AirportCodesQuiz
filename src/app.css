@@ -1,101 +1,76 @@
 body{
   font-family: "Open Sans",Helvetica,Arial,sans-serif;
-  }
+}
 
-  @media screen and (min-width: 35.5em) {
-    body {
-      font-size: 50px;
-    }
+@media screen and (min-width: 35.5em) {
+  body {
+    font-size: 50px;
   }
+}
 
-  @media screen and (min-width: 64em) {
-    body {
-      font-size: 25px;
-    }
+@media screen and (min-width: 64em) {
+  body {
+    font-size: 25px;
   }
+}
 
-  h2 {
-    text-align: center;
-  }
+h2 {
+  text-align: center;
+}
 
-  .questions {
-    text-align: center;
-  }
-  .question {
-    background-color: #E4E4E4;
-    padding: 15px 30px;
-  }
-  .answers {
-    padding: 10px;
-  }
-  .container {
-    margin: 2.5em auto 5em;
-    /*max-width: 50em;*/
-    max-width: 100%;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  .card {
-    background: #fff;
-    box-shadow: 0 0 6px rgba(0,0,0,.5);
-    padding: 2em;
-    border-radius: 6px;
-  }
-  .instruction {
-    font-style: italic;
-    padding-top: 20px;
-  }
+.questions {
+  text-align: center;
+}
+.question {
+  background-color: #E4E4E4;
+  padding: 15px 30px;
+}
+.answers {
+  padding: 10px;
+}
+.container {
+  margin: 2.5em auto 5em;
+  /*max-width: 50em;*/
+  max-width: 100%;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.card {
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0,0,0,.5);
+  padding: 2em;
+  border-radius: 6px;
+}
+.instruction {
+  font-style: italic;
+  padding-top: 20px;
+}
 
-  li {
-    padding: 5px;
-  }
+li {
+  padding: 5px;
+}
 
-  @media screen and (min-width: 35.5em) {
-    button {
-      width: 75%;
-    }
+@media screen and (min-width: 35.5em) {
+  button {
+    width: 75%;
   }
+}
 
-  @media screen and (min-width: 64em) {
-    button {
-      width: 35%;
-    }
+@media screen and (min-width: 64em) {
+  button {
+    width: 35%;
   }
+}
 
+.is-answered {
+  background-color: green;
+}
 
-  i.result-icon {
-    color: green;
-  }
+button.btn-red-bg {
+  background-color: red;
+}
 
-  @media screen and (min-width: 35.5em) {
-    i.result-icon {
-      position: absolute;
-      font-size: 115px;
-      margin-left: -13%;
-    }
-  }
-
-  @media screen and (min-width: 64em) {
-    i.result-icon {
-      position: absolute;
-      font-size: 60px;
-      margin-left: -5%;
-    }
-  }
-
-  i.check-is-hidden {
-    display: none;
-  }
-
-  .is-answered {
-    background-color: green;
-  }
-
-  button.btn-red-bg {
-    background-color: red;
-  }
-
-  button.btn-green-bg {
-    background-color: green;
-  }
+button.btn-green-bg {
+  background-color: green;
+}
 
