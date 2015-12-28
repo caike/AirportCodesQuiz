@@ -15,13 +15,11 @@ class Quiz extends React.Component {
     displayQuestionFlag[questionCounter] = true;
 
     this.state = { displayQuestionFlag, questionCounter };
-    this._nextQuestionHandler = this._nextQuestionHandler.bind(this);
   }
 
   render(){
     let airports = us.shuffle(this.props.data).map( (airport, index) => {
-      return this._buildQuestionForAirport(airport,
-        this.state.displayQuestionFlag[index], index);
+      return this._buildQuestionForAirport(airport, index);
     });
 
     return (<div>
@@ -33,12 +31,15 @@ class Quiz extends React.Component {
     );
   }
 
-  _buildQuestionForAirport(airport, displayQuestion=false, index){
+  _buildQuestionForAirport(airport, index){
+
+    let displayQuestion = this.state.displayQuestionFlag[index];
+
     return(<Question
            {...airport}
            key={index}
            displayQuestion={displayQuestion}
-           nextQuestionHandler={this._nextQuestionHandler}
+           nextQuestionHandler={ () => this._nextQuestionHandler() }
            />);
   }
 

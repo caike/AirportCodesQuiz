@@ -1,27 +1,20 @@
 import React from "react";
 import cx from "classnames";
 
-class Answer extends React.Component {
+const WRONG_ANSWER_BG = "btn-red-bg";
 
-  render(){
+function Answer(props){
 
     let buttonCxs = cx("pure-button", "pure-button-primary", {
-      "is-answered": this.props.isAnswered,
-      [this.props.bgColorClass]: this.props.isAnswered
+      "is-answered": props.isAnswered,
+      [props.bgColorClass || WRONG_ANSWER_BG]: props.isAnswered
     });
 
-    return(<li key={this.props.key}><button
-        onClick={ () => this._submitAnswer() }
-        ref={ (rightAnswer) => this.rightAnswer = rightAnswer }
-        className={buttonCxs}>{this.props.code}</button>
+    return(<li key={props.key}><button
+        onClick={ () => props.submitAnswerHandler() }
+        className={buttonCxs}>{props.code}</button>
       </li>);
-  }
 
-  _submitAnswer(){
-    this.props.submitAnswerHandler(this.props.code);
-  }
 }
-
-Answer.defaultProps = { bgColorClass: "btn-red-bg" };
 
 export default Answer;

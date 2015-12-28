@@ -25,6 +25,9 @@ h2 {
   background-color: #E4E4E4;
   padding: 15px 30px;
 }
+.answer-list {
+  list-style-type: none;
+}
 .answers {
   padding: 10px;
 }
