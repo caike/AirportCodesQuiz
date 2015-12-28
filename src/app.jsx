@@ -13,14 +13,10 @@ import API from "./api";
 
 import Quiz from "./lib/quiz.jsx";
 
-class App extends React.Component {
-
-  render(){
-    return(<div className="quiz">
-             <Quiz data={this.props.list} />
-          </div>);
-  }
-
+function App(props){
+  return(<div className="quiz">
+           <Quiz data={props.list} />
+        </div>);
 }
 
 
