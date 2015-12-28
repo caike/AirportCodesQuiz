@@ -19,7 +19,7 @@ class Quiz extends React.Component {
   }
 
   render(){
-    let airports = this.props.data.map( (airport, index) => {
+    let airports = us.shuffle(this.props.data).map( (airport, index) => {
       return this._buildQuestionForAirport(airport,
         this.state.displayQuestionFlag[index], index);
     });
