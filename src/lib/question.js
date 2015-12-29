@@ -1,7 +1,7 @@
 import React from "react";
 import us from "underscore";
 
-import AnswerList from "./answer-list.jsx";
+import AnswerList from "./answer-list";
 
 class Question extends React.Component {
 

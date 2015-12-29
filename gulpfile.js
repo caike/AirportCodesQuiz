@@ -3,7 +3,7 @@ var browserify = require("gulp-browserify");
 var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 
-const ENTRY_POINT = "src/app.jsx";
+const ENTRY_POINT = "src/app.js";
 
 gulp.task("transpile", function() {
     gulp.src(ENTRY_POINT)

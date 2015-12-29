@@ -11,7 +11,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import API from "./api";
 
-import Quiz from "./lib/quiz.jsx";
+import Quiz from "./lib/quiz";
 
 function App(props){
   return(<div className="quiz">

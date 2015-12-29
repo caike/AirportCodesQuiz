@@ -1,7 +1,7 @@
 import React from "react";
 import us from "underscore";
 
-import Question from "./question.jsx";
+import Question from "./question";
 
 class Quiz extends React.Component {
   constructor(props){

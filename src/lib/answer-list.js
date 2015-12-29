@@ -1,7 +1,7 @@
 import React from "react";
 import us from "underscore";
 
-import Answer from "./answer.jsx";
+import Answer from "./answer";
 
 const NEXT_QUESTION_DELAY = 1000;
 
