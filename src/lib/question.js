@@ -6,9 +6,7 @@ import AnswerList from "./answer-list";
 class Question extends React.Component {
 
   render(){
-    let display = this.props.displayQuestion ? "block" : "none";
-
-    return(<div className="card" style={{ display }}>
+    return(<div className="card">
           <p>{this.props.name}</p>
           <AnswerList
             nextQuestionHandler={this.props.nextQuestionHandler}

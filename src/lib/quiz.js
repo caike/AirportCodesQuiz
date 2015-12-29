@@ -4,54 +4,38 @@ import us from "underscore";
 import Question from "./question";
 
 class Quiz extends React.Component {
+
   constructor(props){
     super(props);
 
-    // from http://www.2ality.com/2013/11/initializing-arrays.html
-    var arr = Array.apply(null, Array(this.props.data.length));
-    let displayQuestionFlag = arr.map(function (x, i) { return false });
-
-    let questionCounter = 0;
-    displayQuestionFlag[questionCounter] = true;
-
-    this.state = { displayQuestionFlag, questionCounter };
+    this.state = { questionCounter: 0 };
   }
 
   render(){
-    let airports = us.shuffle(this.props.data).map( (airport, index) => {
-      return this._buildQuestionForAirport(airport, index);
-    });
+    let question = this._buildQuestionForCurrentAirport();
 
     return (<div>
         <h2>Airport Code Quiz</h2>
         <div className="questions">
-          {airports}
+          {question}
         </div>
       </div>
     );
   }
 
-  _buildQuestionForAirport(airport, index){
+  _buildQuestionForCurrentAirport(){
 
-    let displayQuestion = this.state.displayQuestionFlag[index];
+    let currentAirport = this.props.data[this.state.questionCounter];
 
     return(<Question
-           {...airport}
-           key={index}
-           displayQuestion={displayQuestion}
+           {...currentAirport}
+           key={this.state.questionCounter}
            nextQuestionHandler={ () => this._nextQuestionHandler() }
            />);
   }
 
   _nextQuestionHandler(){
-    let questionCounter = this.state.questionCounter;
-    let displayQuestionFlag = this.state.displayQuestionFlag;
-
-    displayQuestionFlag[questionCounter] = false;
-    questionCounter++;
-
-    displayQuestionFlag[questionCounter] = true;
-    this.setState({ displayQuestionFlag, questionCounter });
+    this.setState({ questionCounter: this.state.questionCounter+1 });
   }
 }
 
