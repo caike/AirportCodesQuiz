@@ -2,6 +2,7 @@ import React from "react";
 import us from "underscore";
 
 import Question from "./question";
+import CompleteMessage from "./complete-message";
 
 class Quiz extends React.Component {
 
@@ -27,11 +28,16 @@ class Quiz extends React.Component {
 
     let currentAirport = this.props.data[this.state.questionCounter];
 
-    return(<Question
-           {...currentAirport}
-           key={this.state.questionCounter}
-           nextQuestionHandler={ () => this._nextQuestionHandler() }
-           />);
+    if(this.state.questionCounter >= this.props.data.length){
+      return(<CompleteMessage /> );
+    }else{
+      return(<Question
+             {...currentAirport}
+             key={this.state.questionCounter}
+             nextQuestionHandler={ () => this._nextQuestionHandler() }
+             />);
+    }
+
   }
 
   _nextQuestionHandler(){
